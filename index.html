@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qubelyra Testwork | Consulting for Business and Technology</title>
+<meta name="description" content="Qubelyra Testwork is a consulting partnership helping organizations assess challenges, improve processes, and explore practical business and technology strategies.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%232a1262'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23fff' stroke-width='3'/%3E%3Crect x='17' y='17' width='10' height='10' fill='%2342d6c8'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --violet:#2d1370; --violet-2:#4a28b5; --navy:#090e2e; --teal:#42d6c8; --teal-d:#0c756e;
+  --ink:#16143a; --muted:#585c7a; --line:#dcdaee; --tint:#f3f1fb; --white:#fff;
+  --head:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --body:'Instrument Sans','Segoe UI',system-ui,-apple-system,sans-serif;
+  --rail:248px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{font-family:var(--body);color:var(--ink);background:var(--white);line-height:1.7;font-size:1.0625rem;-webkit-font-smoothing:antialiased}
+svg{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--violet-2);outline-offset:3px;border-radius:3px}
+h1,h2,h3{font-family:var(--head);line-height:1.08;letter-spacing:-.03em;font-weight:700}
+.skip{position:absolute;left:-999px;top:8px;background:#fff;color:var(--violet);padding:.6rem 1rem;z-index:100}
+.skip:focus{left:8px}
+
+/* Side rail */
+.rail{position:fixed;inset:0 auto 0 0;width:var(--rail);background:var(--navy);color:#fff;display:flex;flex-direction:column;justify-content:space-between;padding:2rem 1.6rem;z-index:50}
+.logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;color:#fff;font-family:var(--head);font-weight:700;font-size:1.35rem;letter-spacing:-.02em}
+.logo svg{width:34px;height:34px;flex:none}
+.rail ul{list-style:none;display:grid;gap:.15rem;margin-top:3rem}
+.rail ul a{display:block;text-decoration:none;color:#c9c6e6;font-weight:500;padding:.6rem .9rem;border-left:2px solid rgba(255,255,255,.14);transition:color .2s,border-color .2s,background .2s}
+.rail ul a:hover{color:#fff;background:rgba(255,255,255,.05)}
+.rail ul a.active{color:#fff;border-left-color:var(--teal);background:rgba(66,214,200,.08)}
+.rail-mail{font-size:.88rem;color:#b3b0d4;word-break:break-all}
+.rail-mail a{text-decoration:none;color:var(--teal)}
+.rail-mail a:hover{text-decoration:underline}
+.bar{display:none}
+.main{margin-left:var(--rail)}
+.in{width:min(1020px,100% - 4rem);margin-inline:auto}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-family:var(--body);font-weight:600;font-size:1rem;padding:.9rem 1.6rem;border:2px solid var(--violet);min-height:48px;cursor:pointer;background:none;color:var(--violet);transition:background .2s,color .2s,transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-solid{background:var(--violet);color:#fff}
+.btn-solid:hover{background:var(--violet-2);border-color:var(--violet-2)}
+.btn-out:hover{background:var(--violet);color:#fff}
+.btn-teal{background:var(--teal);border-color:var(--teal);color:var(--navy)}
+.btn-teal:hover{background:#7ee6dc;border-color:#7ee6dc}
+
+/* Hero */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--white)}
+.hero .in{position:relative;z-index:2;padding:5rem 0}
+.hero h1{font-size:clamp(2.8rem,7.4vw,6rem);color:var(--navy);max-width:11ch}
+.hero h1 span{display:block;color:var(--violet-2)}
+.hero p{margin-top:1.8rem;max-width:46ch;color:var(--muted);font-size:1.18rem}
+.actions{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2.4rem}
+.shapes{position:absolute;right:-6%;top:50%;transform:translateY(-50%);width:min(52vw,640px);z-index:1;opacity:.95}
+.shapes .a{animation:float 9s ease-in-out infinite}
+.shapes .b{animation:float 12s ease-in-out infinite reverse}
+@keyframes float{50%{transform:translateY(-14px)}}
+.load{animation:rise .9s both}
+.load:nth-child(2){animation-delay:.12s}.load:nth-child(3){animation-delay:.24s}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+/* Sections */
+section{padding:clamp(4.5rem,9vw,7rem) 0}
+h2{font-size:clamp(2rem,4.4vw,3.3rem);color:var(--navy)}
+.lede{margin-top:1.2rem;color:var(--muted);max-width:56ch}
+
+/* About: asymmetric */
+.about{background:var(--tint)}
+.about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(2rem,5vw,4.5rem)}
+.about-grid p{margin-top:1.1rem;color:var(--muted)}
+.trio{display:grid;gap:0;align-content:start}
+.trio div{padding:1.25rem 0;border-top:2px solid var(--violet)}
+.trio div:last-child{border-bottom:2px solid var(--violet)}
+.trio h3{font-size:1.25rem;color:var(--violet)}
+.trio p{margin:.25rem 0 0;font-size:.98rem}
+
+/* Services: rows */
+.rows{margin-top:3rem;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:56px 1fr 1.3fr;gap:1.6rem;align-items:center;padding:1.7rem 1rem;border-bottom:1px solid var(--line);transition:background .25s,padding .25s}
+.row:hover{background:var(--tint);padding-left:1.6rem}
+.row .ic{width:52px;height:52px;background:var(--violet);display:grid;place-items:center;border-radius:50%}
+.row .ic svg{width:25px;height:25px;stroke:var(--teal);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.row h3{font-size:1.35rem;color:var(--navy)}
+.row p{color:var(--muted);font-size:1rem}
+
+/* Approach */
+.approach{background:var(--violet);color:#fff}
+.approach h2{color:#fff}
+.approach .lede{color:#d8d3f4}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;margin-top:3.5rem;position:relative}
+.steps::before{content:"";position:absolute;left:8px;right:8px;top:9px;height:2px;background:rgba(255,255,255,.28)}
+.steps li{position:relative;padding-top:2.6rem}
+.steps li::before{content:"";position:absolute;top:0;left:0;width:20px;height:20px;background:var(--teal);transform:rotate(45deg) scale(.7)}
+.steps h3{font-size:1.5rem;margin-bottom:.45rem}
+.steps p{color:#d8d3f4;font-size:.98rem;max-width:26ch}
+
+/* Why */
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:3rem}
+.why-grid div{background:#fff;padding:2.2rem 2rem}
+.why-grid h3{font-size:1.4rem;color:var(--violet);margin-bottom:.5rem}
+.why-grid p{color:var(--muted)}
+.why-grid i{display:block;width:30px;height:4px;background:var(--teal);margin-bottom:1.1rem}
+
+/* Careers */
+.careers{background:var(--navy);color:#fff}
+.careers h2{color:#fff}
+.careers .lede{color:#c8c5e6}
+.chips{display:flex;flex-wrap:wrap;gap:.8rem;margin:2.2rem 0}
+.chips span{border:1.5px solid rgba(66,214,200,.55);color:#fff;padding:.7rem 1.3rem;border-radius:999px;font-weight:500}
+
+/* Contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem);align-items:end}
+.mail{font-family:var(--head);font-weight:700;font-size:clamp(1.2rem,3vw,1.9rem);letter-spacing:-.02em;color:var(--violet);text-decoration:none;word-break:break-all;border-bottom:3px solid var(--teal)}
+.mail:hover{color:var(--violet-2)}
+.cbox{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.6rem}
+#copied{display:block;min-height:1.4rem;margin-top:.8rem;color:var(--teal-d);font-weight:600;font-size:.95rem}
+
+/* Footer */
+footer{background:var(--tint);padding:3rem 0 1.6rem;border-top:1px solid var(--line)}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2rem}
+.foot strong{font-family:var(--head);font-size:1.3rem;color:var(--navy)}
+.foot ul{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem 1.4rem}
+.foot a{text-decoration:none;color:var(--muted)}
+.foot a:hover{color:var(--violet)}
+.copy{margin-top:2rem;color:var(--muted);font-size:.92rem}
+
+/* Reveal */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.rv.vis,.nojs .rv{opacity:1;transform:none}
+
+@media (max-width:1000px){
+  .row{grid-template-columns:52px 1fr}
+  .row p{grid-column:2}
+  .steps{grid-template-columns:repeat(2,1fr);row-gap:2.4rem}
+  .steps::before{display:none}
+}
+@media (max-width:860px){
+  :root{--rail:0px}
+  .rail{inset:0 0 auto 0;width:auto;height:64px;flex-direction:row;align-items:center;padding:0 1.25rem}
+  .rail .logo svg{width:30px;height:30px}
+  .rail ul,.rail-mail{display:none}
+  .rail.open{height:auto;flex-wrap:wrap;padding-bottom:1rem}
+  .rail.open ul{display:grid;order:3;width:100%;margin-top:0}
+  .rail.open .logo,.rail.open .bar{margin-top:1rem}
+  .bar{display:grid;place-items:center;width:44px;height:44px;border:1px solid rgba(255,255,255,.3);background:none;color:#fff;cursor:pointer}
+  .bar svg{width:22px;height:22px}
+  .main{padding-top:64px}
+  .hero{min-height:auto}
+  .in{width:min(1020px,100% - 2.5rem)}
+  .shapes{opacity:.18;right:-25%;width:90vw}
+  .about-grid,.contact-grid,.why-grid{grid-template-columns:1fr}
+  /* vertical timeline on small screens */
+  .steps{grid-template-columns:1fr;row-gap:0}
+  .steps::before{display:block;left:9px;right:auto;top:0;bottom:0;width:2px;height:auto}
+  .steps li{padding:0 0 2.2rem 3rem}
+  .steps li:last-child{padding-bottom:0}
+  .steps p{max-width:none}
+}
+@media (max-width:560px){
+  .actions .btn,.cbox .btn{width:100%}
+  .why-grid div{padding:1.6rem 1.3rem}
+  .row{padding:1.4rem .2rem;gap:1rem}
+  .row:hover{padding-left:.2rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body class="nojs">
+<a class="skip" href="#home">Skip to content</a>
+
+<aside class="rail" id="rail">
+  <div>
+    <a class="logo" href="#home" aria-label="Qubelyra Testwork home">
+      <svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="16" cy="16" r="10" fill="none" stroke="#fff" stroke-width="3.4"/><rect x="18" y="18" width="12" height="12" fill="#42d6c8"/></svg>
+      Qubelyra
+    </a>
+    <ul id="nav">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#approach">Our Approach</a></li>
+      <li><a href="#careers">Careers</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+  <p class="rail-mail">Qubelyra Testwork<br><a href="mailto:alias2@placementhub.online">alias2@placementhub.online</a></p>
+  <button class="bar" id="bar" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+</aside>
+
+<div class="main">
+<main>
+<section class="hero" id="home" style="padding:0">
+  <svg class="shapes" viewBox="0 0 600 600" fill="none" aria-hidden="true">
+    <g class="a"><circle cx="330" cy="260" r="190" fill="#2d1370"/><circle cx="330" cy="260" r="130" fill="none" stroke="#42d6c8" stroke-width="2" stroke-opacity=".7"/></g>
+    <g class="b"><rect x="250" y="300" width="230" height="230" fill="#090e2e"/><rect x="290" y="340" width="150" height="150" fill="none" stroke="#8c77e8" stroke-width="2"/></g>
+    <rect x="130" y="130" width="70" height="70" fill="#42d6c8"/>
+    <circle cx="490" cy="120" r="22" fill="#4a28b5"/>
+  </svg>
+  <div class="in">
+    <h1 class="load">Clarity for Today. <span>Strategy for Tomorrow.</span></h1>
+    <p class="load">Qubelyra Testwork is a consulting partnership that helps organizations understand their challenges, improve how they work, and plan practical business and technology strategies.</p>
+    <div class="actions load">
+      <a class="btn btn-solid" href="#services">Explore Our Services</a>
+      <a class="btn btn-out" href="#contact">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="in about-grid">
+    <div class="rv">
+      <h2>A consulting partnership that starts with the problem.</h2>
+      <p>Qubelyra Testwork is a consulting-focused partnership helping organizations assess their challenges, improve their processes, and explore practical business and technology strategies.</p>
+      <p>We keep our advice grounded in what an organization actually needs, and we explain it plainly so it can be put to use.</p>
+    </div>
+    <div class="trio rv">
+      <div><h3>Assess</h3><p>Understand the situation as it really is.</p></div>
+      <div><h3>Improve</h3><p>Find simpler, more efficient ways of working.</p></div>
+      <div><h3>Explore</h3><p>Weigh practical business and technology options.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="in">
+    <div class="rv">
+      <h2>Our services</h2>
+      <p class="lede">Consulting support for the decisions, systems and projects that shape how an organization runs.</p>
+    </div>
+    <div class="rows">
+      <article class="row rv">
+        <div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2M3 13h18"/></svg></div>
+        <h3>Business &amp; Management Consulting</h3>
+        <p>Independent guidance on structure, priorities and decisions, so leaders can act with a clear view of their options.</p>
+      </article>
+      <article class="row rv">
+        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/></svg></div>
+        <h3>Digital Transformation Advisory</h3>
+        <p>Practical advice on adopting digital tools and ways of working that suit your organization and your people.</p>
+      </article>
+      <article class="row rv">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0113.7-5.6L20 8M20 3v5h-5M20 12a8 8 0 01-13.7 5.6L4 16M4 21v-5h5"/></svg></div>
+        <h3>Business Process Improvement</h3>
+        <p>A review of how work gets done today, with recommendations that reduce friction and improve efficiency.</p>
+      </article>
+      <article class="row rv">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
+        <h3>Technology Strategy</h3>
+        <p>Clear, business-led recommendations on technology direction, to help you plan investments with confidence.</p>
+      </article>
+      <article class="row rv">
+        <div class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="17" rx="2"/><path d="M9 2v4M15 2v4M8 12l2.5 2.5L16 9"/></svg></div>
+        <h3>Project Planning &amp; Operational Support</h3>
+        <p>Structured planning and hands-on support that keep projects organized, on track and easy to follow.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="approach" id="approach">
+  <div class="in">
+    <div class="rv">
+      <h2>Our approach</h2>
+      <p class="lede">A simple process that turns open questions into practical next steps.</p>
+    </div>
+    <ol class="steps">
+      <li class="rv"><h3>Understand</h3><p>Listen first, learning your goals, context and constraints.</p></li>
+      <li class="rv"><h3>Analyze</h3><p>Examine the facts and locate the real challenges.</p></li>
+      <li class="rv"><h3>Strategize</h3><p>Shape realistic options and a recommended path.</p></li>
+      <li class="rv"><h3>Improve</h3><p>Support the changes and refine them as needs evolve.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="why">
+  <div class="in">
+    <div class="rv">
+      <h2>Why Qubelyra</h2>
+      <p class="lede">How we work is easy to describe, and easy to hold us to.</p>
+    </div>
+    <div class="why-grid">
+      <div class="rv"><i></i><h3>Structured problem-solving</h3><p>A clear method for breaking complex issues into manageable parts.</p></div>
+      <div class="rv"><i></i><h3>Collaborative working</h3><p>We work alongside your team instead of handing over a report and leaving.</p></div>
+      <div class="rv"><i></i><h3>Clear communication</h3><p>Plain language and open conversation at every stage.</p></div>
+      <div class="rv"><i></i><h3>A practical approach</h3><p>Recommendations shaped to be realistic and usable day to day.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="careers" id="careers">
+  <div class="in rv">
+    <h2>Careers and learning</h2>
+    <p class="lede">Consulting rewards curiosity and a willingness to learn. Explore opportunities to build your skills and grow your career with Qubelyra Testwork.</p>
+    <div class="chips"><span>Business analysis</span><span>Consulting</span><span>Project coordination</span><span>Research</span></div>
+    <a class="btn btn-teal" href="mailto:alias2@placementhub.online?subject=Careers%20and%20Learning%20Enquiry">Explore Opportunities</a>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="in contact-grid">
+    <div class="rv">
+      <h2>Contact us</h2>
+      <p class="lede">Tell us about a challenge you are working on, or ask about our services. Send us an email and we will respond.</p>
+    </div>
+    <div class="rv">
+      <a class="mail" href="mailto:alias2@placementhub.online">alias2@placementhub.online</a>
+      <div class="cbox">
+        <a class="btn btn-solid" href="mailto:alias2@placementhub.online">Send an email</a>
+        <button class="btn btn-out" id="copy" type="button">Copy address</button>
+      </div>
+      <span id="copied" role="status" aria-live="polite"></span>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="in">
+    <div class="foot">
+      <div><strong>Qubelyra Testwork</strong><p style="color:var(--muted)">Business and technology consulting.</p></div>
+      <nav aria-label="Footer"><ul>
+        <li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li>
+        <li><a href="#approach">Our Approach</a></li><li><a href="#careers">Careers</a></li><li><a href="#contact">Contact</a></li>
+      </ul></nav>
+      <div><a href="mailto:alias2@placementhub.online">alias2@placementhub.online</a></div>
+    </div>
+    <p class="copy">&copy; <span id="yr">2026</span> Qubelyra Testwork. All rights reserved.</p>
+  </div>
+</footer>
+</div>
+
+<script>
+(function(){
+  document.body.classList.remove('nojs');
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  var rail = document.getElementById('rail'), bar = document.getElementById('bar'), nav = document.getElementById('nav');
+  bar.addEventListener('click', function(){
+    var o = rail.classList.toggle('open');
+    bar.setAttribute('aria-expanded', o);
+    bar.setAttribute('aria-label', o ? 'Close menu' : 'Open menu');
+  });
+  nav.addEventListener('click', function(e){ if(e.target.tagName === 'A'){ rail.classList.remove('open'); bar.setAttribute('aria-expanded', false); } });
+
+  var links = [].slice.call(nav.querySelectorAll('a')), rvs = [].slice.call(document.querySelectorAll('.rv'));
+  if('IntersectionObserver' in window){
+    var so = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ links.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id); }); } });
+    }, {rootMargin:'-40% 0px -55% 0px'});
+    links.forEach(function(a){ var s = document.querySelector(a.getAttribute('href')); if(s) so.observe(s); });
+    var ro = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('vis'); ro.unobserve(e.target); } });
+    }, {threshold:.1});
+    rvs.forEach(function(el,i){ el.style.transitionDelay = (i % 4) * 70 + 'ms'; ro.observe(el); });
+  } else { rvs.forEach(function(el){ el.classList.add('vis'); }); }
+
+  var cp = document.getElementById('copy'), msg = document.getElementById('copied');
+  cp.addEventListener('click', function(){
+    var addr = 'alias2@placementhub.online';
+    function done(){ msg.textContent = 'Email address copied.'; setTimeout(function(){ msg.textContent = ''; }, 2500); }
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(addr).then(done, function(){ msg.textContent = addr; }); }
+    else { msg.textContent = addr; }
+  });
+})();
+</script>
+</body>
+</html>
